@@ -31,7 +31,7 @@ A web-based study guide and practice exam app for ARRL amateur radio license exa
 Requires [Nix](https://nixos.org/) and [direnv](https://direnv.net/). The flake provides Node 22.
 
 ```sh
-cd ham-exam-study
+cd sideband
 direnv allow    # sets up Node via Nix
 npm install
 npm run dev     # starts dev server at http://localhost:5173
