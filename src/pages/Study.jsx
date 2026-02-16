@@ -47,6 +47,11 @@ export default function Study() {
   const currentSubelement = data.subelements.find((s) => s.id === activeSubelement)
   const currentGroup = currentSubelement?.groups.find((g) => g.id === activeGroup)
 
+  // Extract topic name from subelement title (strip "[N Exam Questions...] N Questions" suffix)
+  function subelementTopic(title) {
+    return title.replace(/\s*\[.*$/, '').replace(/\s*–\s*$/, '') || title
+  }
+
   return (
     <div>
       <div className="flex items-center gap-2 mb-4">
@@ -71,7 +76,10 @@ export default function Study() {
                       setActiveGroup(sub.groups[0]?.id || null)
                     }}
                   >
-                    {sub.id}
+                    <span>{sub.id}</span>
+                    <span className="font-normal text-xs text-base-content/60 ml-1">
+                      {subelementTopic(sub.title)}
+                    </span>
                   </summary>
                   <ul>
                     {sub.groups.map((group) => (
@@ -101,8 +109,17 @@ export default function Study() {
         <div className="flex-1 min-w-0">
           {currentGroup && (
             <>
-              <h2 className="text-lg font-semibold mb-1">{currentGroup.id}</h2>
-              <p className="text-sm text-base-content/60 mb-4">{currentGroup.title}</p>
+              <div className="mb-4">
+                <h2 className="text-lg font-semibold">
+                  {currentSubelement.id}: {subelementTopic(currentSubelement.title)}
+                </h2>
+                <p className="text-sm text-base-content/50">{currentSubelement.title}</p>
+                <div className="divider my-1"></div>
+                <h3 className="text-base font-medium">{currentGroup.id}</h3>
+                {currentGroup.title && (
+                  <p className="text-sm text-base-content/60">{currentGroup.title}</p>
+                )}
+              </div>
               {currentGroup.questions.map((q) => (
                 <QuestionCard key={q.id} question={q} mode="study" />
               ))}
