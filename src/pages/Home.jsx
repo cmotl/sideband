@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div>
       <h1 className="text-3xl font-bold">Sideband</h1>
-      <p className="text-base-content/60 mb-6">Your study companion on the side of the band.</p>
+      <p className="text-base-content/60 mb-6">Your study companion on the side of the band. A web-based study guide and practice exam app for ARRL ham radio license exams.</p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {POOLS.map((pool) => (
           <div key={pool.id} className="card bg-base-100 shadow-md">
