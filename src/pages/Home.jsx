@@ -17,6 +17,16 @@ export default function Home() {
               <p className="text-sm text-base-content/70">
                 {pool.examQuestions} questions on the exam &middot; {pool.passingScore} to pass
               </p>
+              {pool.book && (
+                <a
+                  href={pool.book.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs link link-primary"
+                >
+                  {pool.book.title}
+                </a>
+              )}
               <div className="card-actions justify-end mt-2">
                 <Link to={`/study/${pool.id}`} className="btn btn-primary btn-sm">
                   Study
